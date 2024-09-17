@@ -49,11 +49,11 @@ func (o *OllamaClient) Query(ctx context.Context, query string, config config.Co
 	}
 
 	if !config.ChainOfThought {
-		return o.simpleQuery(ctx, query)
+		return o.simpleQuery(ctx, query, config)
 	}
 
 	// Stage One
-	stageOneResponse, err := o.chatQuery(ctx, "llama3.1", []Message{
+	stageOneResponse, err := o.chatQuery(ctx, config.Model, []Message{
 		{Role: "system", Content: stageOneChainOfThought},
 		{Role: "user", Content: query},
 	})
@@ -66,7 +66,7 @@ func (o *OllamaClient) Query(ctx context.Context, query string, config config.Co
 	}
 
 	// Stage Two
-	stageTwoResponse, err := o.chatQuery(ctx, "llama3.1", []Message{
+	stageTwoResponse, err := o.chatQuery(ctx, config.Model, []Message{
 		{Role: "system", Content: stageOneChainOfThought},
 		{Role: "user", Content: query},
 		{Role: "assistant", Content: stageOneResponse},
@@ -82,7 +82,7 @@ func (o *OllamaClient) Query(ctx context.Context, query string, config config.Co
 	}
 
 	// Final Stage
-	finalResponse, err := o.chatQuery(ctx, "llama3.1", []Message{
+	finalResponse, err := o.chatQuery(ctx, config.Model, []Message{
 		{Role: "system", Content: stageOneChainOfThought},
 		{Role: "user", Content: query},
 		{Role: "assistant", Content: stageOneResponse},
@@ -108,8 +108,8 @@ func (o *OllamaClient) SetContext(context string) error {
 	return nil
 }
 
-func (o *OllamaClient) simpleQuery(ctx context.Context, query string) (*AIResponse, error) {
-	response, err := o.chatQuery(ctx, "llama3.1", []Message{
+func (o *OllamaClient) simpleQuery(ctx context.Context, query string, config config.Config) (*AIResponse, error) {
+	response, err := o.chatQuery(ctx, config.Model, []Message{
 		{Role: "user", Content: query},
 	})
 	if err != nil {

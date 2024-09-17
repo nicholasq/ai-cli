@@ -16,6 +16,7 @@ var runCmd = &cobra.Command{
     --cot: Enable chain of thought reasoning
     --no-web: Disable web search capability
     --no-func: Disable function calling capability
+    --model: LLM to use, Default=llama3.1
     --debug: Print debugging logs`,
 	Example: `  ai run "What is the capital of France?"
   ai run --cot "Explain the process of photosynthesis"
@@ -28,6 +29,7 @@ var cfg config.Config
 func init() {
 	rootCmd.AddCommand(runCmd)
 
+	runCmd.Flags().StringVar(&cfg.Model, "model", "llama3.1", "LLM to use. Default=llama3.1")
 	runCmd.Flags().BoolVar(&cfg.ChainOfThought, "cot", false, "Enable chain of thought")
 	runCmd.Flags().BoolVar(&cfg.WebSearch, "no-web", false, "Disable web search")
 	runCmd.Flags().BoolVar(&cfg.FunctionCall, "no-func", false, "Disable function calling")
