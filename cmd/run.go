@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"nicholasq.xyz/ai/internal/ai"
@@ -46,8 +44,9 @@ func runQuery(cmd *cobra.Command, args []string) {
 	query := args[0]
 	client := ai.NewOllamaClient()
 
-	color.Blue("Query: %s\n", query)
-	fmt.Println("---")
+	if cfg.Debug {
+		color.Blue("Query:\n%s\n---\n", query)
+	}
 
 	response, err := client.Query(cmd.Context(), query, cfg)
 	if err != nil {

@@ -53,6 +53,7 @@ func (o *OllamaClient) Query(ctx context.Context, query string, config config.Co
 	}
 
 	// Stage One
+	color.Blue("Thinking deeply...")
 	stageOneResponse, err := o.chatQuery(ctx, config.Model, []Message{
 		{Role: "system", Content: stageOneChainOfThought},
 		{Role: "user", Content: query},
@@ -66,6 +67,7 @@ func (o *OllamaClient) Query(ctx context.Context, query string, config config.Co
 	}
 
 	// Stage Two
+	color.Blue("Refining thought process...")
 	stageTwoResponse, err := o.chatQuery(ctx, config.Model, []Message{
 		{Role: "system", Content: stageOneChainOfThought},
 		{Role: "user", Content: query},
@@ -82,6 +84,7 @@ func (o *OllamaClient) Query(ctx context.Context, query string, config config.Co
 	}
 
 	// Final Stage
+	color.Blue("Considering final answer...")
 	finalResponse, err := o.chatQuery(ctx, config.Model, []Message{
 		{Role: "system", Content: stageOneChainOfThought},
 		{Role: "user", Content: query},
