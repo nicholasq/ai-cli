@@ -3,7 +3,7 @@ package ai
 import (
 	"context"
 
-	"nicholasq.xyz/ai/internal/config"
+	"nicholasq.xyz/ai-cli/internal/config"
 )
 
 type AIClient interface {

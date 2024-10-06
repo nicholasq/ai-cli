@@ -1,10 +1,9 @@
-module nicholasq.xyz/ai
+module nicholasq.xyz/ai-cli
 
 go 1.23.1
 
 require (
 	github.com/fatih/color v1.17.0
-	github.com/ollama/ollama v0.3.10
 	github.com/spf13/cobra v1.8.1
 )
 

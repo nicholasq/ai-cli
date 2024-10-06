@@ -3,8 +3,8 @@ package cmd
 import (
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
-	"nicholasq.xyz/ai/internal/ai"
-	"nicholasq.xyz/ai/internal/config"
+	"nicholasq.xyz/ai-cli/internal/ai"
+	"nicholasq.xyz/ai-cli/internal/config"
 )
 
 var runCmd = &cobra.Command{

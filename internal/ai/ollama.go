@@ -9,7 +9,7 @@ import (
 
 	"github.com/fatih/color"
 
-	"nicholasq.xyz/ai/internal/config"
+	"nicholasq.xyz/ai-cli/internal/config"
 )
 
 type OllamaClient struct {
